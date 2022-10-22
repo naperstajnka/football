@@ -1,5 +1,7 @@
 <template>
-          <v-btn color="primary" @click="getData()"> Показать </v-btn>
+<div>
+<p>Привет</p>
+</div>
 </template>
 
 <script>
