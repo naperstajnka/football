@@ -47,8 +47,23 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    proxy: true,
+    // Мой домашний url откуда идет запрос
+    baseURL: 'http://localhost:3000',
+    withCredentials: true,
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+      'X-Auth-Token':'08d0a84220dc4ef68f2d63175c788d53'
+    }
+  },
+
+  proxy: {
+    '/api/': {
+      target: 'https://api.football-data.org/v4/',
+      changeOrigin: true,
+      pathRewrite: { '^/api/': '' }
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
