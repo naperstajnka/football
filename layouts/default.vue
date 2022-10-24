@@ -3,24 +3,14 @@
         <div id="pole">
             <div id="h_header1">
                 <ul class="menu">
-                    <li id="li1"><a href="/">Лиги</a></li>
-                    <li id="li2"><a href="/komandy">Команды</a></li>
+                    <li id="li1"><a no-prefetc class="menu_pole" href="/">Лиги</a></li>
+                    <li id="li2"><a no-prefetc class="menu_pole" href="/komandy">Команды</a></li>
                 </ul>
             </div>
             <nuxt />
         </div>
     </div>
 </template>
-
-<script>
-
-export default {
-
-  components:{
-
-  }
-}
-</script>
 
 <style lang="scss">
 
@@ -31,7 +21,7 @@ export default {
     height: 100%;
     left: 0px;
     top: 0px;
-    background: #fff;
+    background: #ffffff;
 }
 ::-webkit-scrollbar {
   width: 0;
@@ -75,7 +65,7 @@ export default {
     left: calc(50% - 8%/2 + 4%);
 }
 
-.menu a {
+.menu_pole {
     position: absolute;
     width: 120px;
     height: 28px;
@@ -84,7 +74,6 @@ export default {
 
     color: #000;
 
-    /*убрать подчеркивание у ссылки*/
     text-decoration: none;
 
     font-family: 'Alike', serif;
@@ -95,11 +84,10 @@ export default {
     text-align: center;
 }
 
-.menu li:hover {
-    border: 2px solid #7CBEC1;
+.menu a:hover {
+    color: #018e98;
 }
 
-
-/* Конец - меню */
+// Конец - меню 
 
 </style>

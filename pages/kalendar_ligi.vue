@@ -2,14 +2,15 @@
   <div>
     <div class="breadcrumb">
       <a href="/">Главная</a><h> > </h><a href="/kalendar_ligi">Календарь лиги</a>
-      </div>
-    <label class="g_zagolovki">Матчи</label>
+    </div>
+    <h1>Матчи лиги</h1>
  </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
+  layoults: 'kalendar_komandy',
   methods: {
     getData() {
       console.log('Я тут');
@@ -21,3 +22,4 @@ export default {
   }
 }
 </script>
+

@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'IndexPage',
+ name: 'IndexPage',
   methods: {
     getData() {
       console.log('Я тут');
@@ -23,3 +23,4 @@ export default {
   }
 }
 </script>
+
