@@ -11,17 +11,7 @@
 
 <script>
 export default {
- name: 'IndexPage',
-
-  methods: {
-    getData() {
-      console.log('Я тут');
-      this.$axios.$get('api/')
-      .then(res => {
-
-      })
-    }
-  }
+  name: 'IndexPage',
 }
 </script>
 

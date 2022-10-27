@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="breadcrumb">
-      <a href="/">Главная</a><h> > </h><a href="/kalendar_ligi">Матчи команды</a>
+      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id2">Матчи команды</a>
     </div>
     <h1>Матчи команды</h1>
  </div>
@@ -10,17 +10,8 @@
 <script>
 export default {
   name: 'IndexPage',
-
-  methods: {
-    getData() {
-      console.log('Я тут');
-      this.$axios.$get('api/teams/%7Bid%7D')
-      .then(res => {
-        console.log(res);
-      })
-    }
-  }
 }
+
 </script>
 
 <style lang="scss">
