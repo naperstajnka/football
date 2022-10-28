@@ -1,17 +1,22 @@
 <template>
   <section>
     <div class="breadcrumb">
-      <a href="/ligi">Лиги</a><h> > </h><a href="/ligi/_id">Матчи лиги</a>
+      <a href="/ligi">Лиги</a><h> > </h><a href="/ligi/_id">{{$route.params.id}}</a>
     </div>
-    <h1>Liga {{$route.params.id}}</h1>
+    <h1>{{$route.params.id}}</h1>
+
  </section>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-}
 
+  validate({params}) {
+    return true
+  }
+
+}
 </script>
 
 <style lang="scss">
@@ -63,6 +68,5 @@ h1 {
     text-decoration: none;
 }
 /* Конец - Хлебные крошки*/
-
 
 </style>

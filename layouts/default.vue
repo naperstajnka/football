@@ -4,7 +4,7 @@
             <div id="h_header1">
                 <ul class="menu">
                     <li id="li1"><a no-prefetc class="menu_pole" href="/ligi/">Лиги</a></li>
-                    <li id="li2"><a no-prefetc class="menu_pole" href="/komandy_v/">Команды</a></li>
+                    <li id="li2"><a no-prefetc class="menu_pole" href="/komandy/">Команды</a></li>
                 </ul>
             </div>
             <nuxt />

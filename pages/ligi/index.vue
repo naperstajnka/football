@@ -7,8 +7,8 @@
       <button>Найти</button>
     </form>
     <div class="grid-container">
-      <div v-for="liga of 6" :key="liga" href="#" @click.prevent="openLigi(liga)" class="grid-element">
-        Liga {{liga}}
+      <div v-for="liga of ligi" :key="liga.id" href="#" @click.prevent="openLigi(liga)" class="grid-element">
+        {{liga.name}}
       </div>
     </div>
 
@@ -19,14 +19,17 @@
 export default {
   name: 'IndexPage',
 
-async asyncData({$axios}) {
-  const ligi = await $axios.$get('api/competitions/')
-  return{ligi}
-  },
-
   data: () => ({
     ligi: []
   }),
+
+async mounted() {
+  await this.$axios.$get('api/competitions/')
+  .then(res => {
+    this.ligi = res.competitions;
+  })
+
+  },
 
 
 methods: {

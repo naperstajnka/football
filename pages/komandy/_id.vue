@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="breadcrumb">
-      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id2">Матчи команды</a>
+      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id">Команда {{$route.params.id}}</a>
     </div>
-    <h1>Матчи команды</h1>
+    <h1>Команда {{$route.params.id}}</h1>
  </div>
 </template>
 

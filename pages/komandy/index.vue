@@ -6,12 +6,36 @@
       </label>
       <button>Найти</button>
     </form>
+    <div class="grid-container">
+    <div v-for="komanda of komandy" :key="komanda.id" href="#" @click.prevent="openLigi(komanda)" class="grid-element">
+        {{komanda.name}}
+      </div>
+      </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
+
+
+data: () => ({
+    komandy: []
+  }),
+
+async mounted() {
+  await this.$axios.$get('api/teams/')
+  .then(res => {
+    this.komandy = res.teams;
+  })
+
+  },
+
+  methods: {
+  openLigi(komanda) {
+    this.$router.push('/komandy/' + komanda)
+  }
+}
 }
 </script>
 
@@ -65,4 +89,28 @@ export default {
     border: 2px solid #7CBEC1;
 }
 /* Конец - поиск */
+
+/* Карточки */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    padding: 300px;
+}
+
+.grid-element {
+    height: 200px;
+    padding: 20px;
+    border: solid 2px #000000;
+
+    background: #FFFFFF;
+}
+
+.grid-element:hover {
+    border: 2px solid #7CBEC1;
+    color: #536591;
+}
+
+/* Конец - карточки */
 </style>
