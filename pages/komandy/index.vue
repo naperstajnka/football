@@ -7,7 +7,7 @@
       <button>Найти</button>
     </form>
     <div class="grid-container">
-    <div v-for="komanda of komandy" :key="komanda.id" href="#" @click.prevent="openLigi(komanda)" class="grid-element">
+    <div v-for="komanda of komandy" :key="komanda.id" href="#" @click.prevent="openKomanda(komanda)" class="grid-element">
         {{komanda.name}}
       </div>
       </div>
@@ -18,24 +18,27 @@
 export default {
   name: 'IndexPage',
 
+  async fetch({store}) {
+  if(store.getters['komandy/komandy'].length === 0) {
+    await store.dispatch('komandy/fetch')
+  }
+},
 
-data: () => ({
-    komandy: []
+  data: () => ({
+    
   }),
 
-async mounted() {
-  await this.$axios.$get('api/teams/')
-  .then(res => {
-    this.komandy = res.teams;
-  })
-
+  computed: {
+    komandy() {
+      return this.$store.getters['komandy/komandy']
+    }
   },
 
   methods: {
-  openLigi(komanda) {
-    this.$router.push('/komandy/' + komanda)
+    openKomanda(komanda) {
+    this.$router.push('/komandy/' + komanda.id)
+    }
   }
-}
 }
 </script>
 

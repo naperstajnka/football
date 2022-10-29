@@ -20,6 +20,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+//цвет загрузки
+  louding: {color: '7CBEC1'},
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     

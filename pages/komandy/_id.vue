@@ -1,17 +1,30 @@
 <template>
   <div>
     <div class="breadcrumb">
-      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id">Команда {{$route.params.id}}</a>
+      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id">{{}}</a>
     </div>
-    <h1>Команда {{$route.params.id}}</h1>
+    <h1>{{}}</h1>
  </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-}
 
+  data: () => ({
+    matchesKomandy: [],
+  }),
+
+  validate({params}) {
+    return /^\d+$/.test(params.id)
+  },
+
+  async asyncData({$axios, params}) {
+    const res = await $axios.$get('api/teams/' + params.id + '/matches/')
+    const matchesKomandy = res.matches;
+    return{matchesKomandy}
+  } 
+}
 </script>
 
 <style lang="scss">

@@ -19,24 +19,27 @@
 export default {
   name: 'IndexPage',
 
+async fetch({store}) {
+  if(store.getters['ligi/ligi'].length === 0) {
+    await store.dispatch('ligi/fetch')
+  }
+},
+
   data: () => ({
-    ligi: []
+    
   }),
 
-async mounted() {
-  await this.$axios.$get('api/competitions/')
-  .then(res => {
-    this.ligi = res.competitions;
-  })
-
+  computed: {
+    ligi() {
+      return this.$store.getters['ligi/ligi']
+    }
   },
 
-
-methods: {
-  openLigi(liga) {
-    this.$router.push('/ligi/' + liga)
+  methods: {
+    openLigi(liga) {
+      this.$router.push('/ligi/' + liga.id)
+    }
   }
-}
 
 }
 
