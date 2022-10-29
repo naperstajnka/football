@@ -1,20 +1,32 @@
 <template>
   <section>
+  <div>
     <div class="breadcrumb">
-      <a href="/ligi">Лиги</a><h> > </h><a href="/ligi/_id">{{$route.params.id}}</a>
+      <a href="/ligi">Лиги</a><h> > </h><a href="/_id">{{$route.params.id}}</a>
     </div>
-    <h1>{{$route.params.id}}</h1>
-
+    <h1">{{}}</h1>
+</div>
  </section>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  
+name: 'IndexPage',
 
-  validate({params}) {
-    return true
-  }
+  data: () => ({
+    matches: [],
+  }),
+
+validate({params}) {
+  return /^\d+$/.test(params.id)
+},
+
+  async asyncData({$axios, params}) {
+    const res = await $axios.$get('api/competitions/' + params.id + '/matches/')
+    const matches = res.matches;
+    return{matches}
+  } 
 
 }
 </script>
