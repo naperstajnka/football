@@ -1,5 +1,10 @@
 <template>
   <div>
+
+    <a href="/">
+      <img src="@/static/majch.png" alt="" class="imgClass">
+    </a>
+
     <form class="search-form">
       <label>
         <input type="text" name="search" placeholder="">
@@ -16,7 +21,6 @@
     </div>
     </div>
 
-
   </div>
 </template>
 
@@ -32,9 +36,9 @@ export default {
 
 
   data() {
-return {
-    komandy: [],
-}
+    return {
+      komandy: [],
+    }
   },
 
 
@@ -129,4 +133,14 @@ return {
   color: #536591;
 }
 /* Конец - карточки */
+
+//logo
+.imgClass {
+  position: absolute;
+  width: 5%;
+  height: 10%;
+  left: calc(50% - 5%/2);
+  top: 9%;
+}
+
 </style>
