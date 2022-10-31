@@ -1,38 +1,88 @@
 <template>
   <div>
+  
     <div class="breadcrumb">
-      <a href="/komandy">Команды</a><h> > </h><a href="/komandy/_id">{{}}</a>
+      <v-breadcrumbs 
+      :items="items"
+      divider=">"
+      ></v-breadcrumbs>
     </div>
-    <h1>{{}}</h1>
- </div>
+
+    <h1>{{nameKomandy.name}}</h1>
+
+    <div class="tableKomanda">
+      <v-data-table
+      :headers="headers"
+      :items="matchesKomandy"
+      :items-per-page="7"
+      class="elevation-1"
+      ></v-data-table>
+    </div>
+
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage',
+  export default {
+    name: 'IndexPage',
 
-  data: () => ({
-    matchesKomandy: [],
-  }),
+    validate({params}) {
+      return true
+    },
 
-  validate({params}) {
-    return /^\d+$/.test(params.id)
-  },
+    async asyncData({$axios, params}) {
+      const res = await $axios.$get('api/teams/' + params.id + '/matches/')
+      const nameKomandy = await $axios.$get('api/teams/' + params.id)
+      const matchesKomandy = res.matches;
+      return{matchesKomandy, nameKomandy}
+    },
 
-  async asyncData({$axios, params}) {
-    const res = await $axios.$get('api/teams/' + params.id + '/matches/')
-    const matchesKomandy = res.matches;
-    return{matchesKomandy}
-  } 
-}
+    data: () => ({
+      matchesKomandy: [],
+      nameKomandy: [],
+      items: [
+        {
+          text: 'Главная',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Команды',
+          disabled: false,
+          href: '/komandy/',
+        },
+        {
+          text: 'Команда',
+          disabled: true,
+          href: '/komandy/_id',
+        },
+        ],
+
+      headers: [
+        {
+          text: 'Дата и время проведения',
+          align: 'start',
+          sortable: true,
+          value: 'utcDate',
+        },
+        { text: 'Статус матча', value: 'status' },
+        { text: 'Команда А', value: 'homeTeam.name' },
+        { text: 'Счет', value: 'score.fullTime.home' },
+        { text: 'halfTime', value: 'score.halfTime.home' },
+        { text: 'Команда Б', value: 'awayTeam.name' },
+        { text: 'Счет', value: 'score.fullTime.away' },
+        { text: 'halfTime', value: 'score.halfTime.away' },
+      ],
+    })
+  }
 </script>
 
 <style lang="scss">
 //заголовки
 h1 {
     position: absolute;
-    width: 250px;
-    left: calc(50% - 250px/2);
+    width: 500px;
+    left: calc(50% - 500px/2);
     top: 15%;
 
     color: #000000;
@@ -46,37 +96,30 @@ h1 {
 }
 
 /* Хлебные крошки*/
-/* Стиль списка */
 .breadcrumb {
     position: absolute;
     left: calc(50% - 100%/2 + 14%);
     top: 10%;
-
-    /*убрать подчеркивание у ссылки*/
-    text-decoration: none;
-}
-
-/* Добавить цвет для всех ссылок */
-.breadcrumb a {
-    color: #oooooo;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.breadcrumb h {
     color: #000000;
-    font-size: 12px;
+
+    //почему не меняется цвет на черный?
 }
 
 /* Добавить цвет на наведении курсора мыши */
 .breadcrumb a:hover {
     color: #018e98;
-
-    /*убрать подчеркивание у ссылки*/
-    text-decoration: none;
 }
 /* Конец - Хлебные крошки*/
 
+/*таблица*/
+.tableKomanda {
+  position: absolute;
+  width: 70%;
+  left: calc(50% - 100%/2 + 14%);
+  top: 35%;
+  text-align: center;
+}
+/*конец таблица*/
 
 </style>
 
