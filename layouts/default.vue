@@ -1,12 +1,12 @@
 <template>
    <div>
-        <div id="pole">
-            <div id="h_header1">
-                <ul class="menu">
-                    <li id="li1"><a no-prefetc class="menu_pole" href="/ligi/">Лиги</a></li>
-                    <li id="li2"><a no-prefetc class="menu_pole" href="/komandy/">Команды</a></li>
-                </ul>
-            </div>
+        <div class="pole">
+           <v-toolbar class="h_header" dense color="#018e98">
+                <div class="menu_pole">
+                    <nuxt-link id="menu_ligi" class="menu" to="/ligi">Все лиги</nuxt-link>
+                    <nuxt-link id="menu_komandy" class="menu" to="/komandy">Команды</nuxt-link>
+                </div>
+            </v-toolbar>
             <nuxt />
         </div>
     </div>
@@ -15,8 +15,8 @@
 <style lang="scss">
 
 //поле
-#pole {
-  position: absolute;
+.pole {
+    position: absolute;
     width: 100%;
     height: 100%;
     left: 0px;
@@ -28,66 +28,46 @@
 }
 
 //шапка
-#h_header1 {
+.h_header {
     position: absolute;
     width: 100%;
     height: 60px;
     left: 0px;
     top: 0px;
 
-    background: #f2f3f5;
+    //background: #018e98;
 }
 
 //меню
-.menu {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.menu li {
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 8%;
-    height: 58px;
-    top: 1px;
-
-    background: #f2f3f5;
-    border: 2px solid #f2f3f5;
-}
-
-#li1 {
-    left: calc(50% - 8%/2 - 4%);
-}
-
-#li2 {
-    left: calc(50% - 8%/2 + 4%);
-}
-
 .menu_pole {
     position: absolute;
-    width: 120px;
-    height: 28px;
-    left: calc(50% - 120px/2);
-    top: 16px;
+    width: 300px;
+    left: calc(50% - 300px/2);
+    top: 14px;
+}
 
-    color: #000;
-
+.menu {
     text-decoration: none;
+    color: #ffffff;
 
-    font-family: 'Alike', serif;
-    font-style: normal;
-    font-weight: 400;
     font-size: 24px;
-    line-height: 30px;
-    text-align: center;
 }
 
-.menu a:hover {
-    color: #018e98;
+.menu:hover {
+    color: #ffffff;
 }
 
+#menu_ligi {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#menu_komandy {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
 // Конец - меню 
 
 </style>
