@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/static/majch.png" alt="" class="imgClass">
+    <img src="@/assets/majch.png" alt="" class="imgGl">
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss">
-.imgClass {
+.imgGl {
   position: absolute;
   width: 20%;
   height: 40%;

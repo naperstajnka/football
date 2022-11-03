@@ -1,147 +1,213 @@
 <template>
   <div>
-
+  
     <a href="/">
-      <img src="@/static/majch.png" alt="" class="imgClass">
+      <img src="@/assets/majch.png" alt="" class="imgClass">
     </a>
+    <a class="na_glavnyy" to="/">На главную</a>
 
-    <form class="search-form">
-      <label>
-        <input type="text" name="search" placeholder="">
-      </label>
-      <button>Найти</button>
-    </form>
+    <div class="matchKartochki">
+      <v-container fluid>
+        <v-data-iterator
+          :items="komandy"
+          :items-per-page.sync="itemsPerPage"
+          :page.sync="page"
+          :search="search"
+          :sort-desc="sortDesc"
+          hide-default-footer
+        >
+          <template v-slot:header>
+            <v-toolbar
+              dark
+              color="#018e98"
+              class="mb-1"
+            >
+              <v-text-field
+                v-model="search"
+                clearable
+                flat
+                solo-inverted
+                hide-details
+                prepend-inner-icon="mdi-magnify"
+                label="Search"
+              ></v-text-field>
+            </v-toolbar>
+          </template>
 
-    <div class="grid-container">
-    <div v-for="komanda of komandy" :key="komanda.id" href="#" class="grid-element" @click.prevent="openKomanda(komanda)">
+          <template v-slot:default="props">
+            <v-row>
+              <v-col
+                v-for="item in props.items"
+                :key="item.name"
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+              >
+                <a  @click.prevent="openKomandy(item)">
+                  <v-card>
+              
+                    <v-card-title class="subheading font-weight-bold">
+                      {{ item.name }}
+                    </v-card-title>
 
-        <h3>{{komanda.name}}</h3>
-        <img :src="ImageSSS" :alt="selectedImg">
+                    <v-divider></v-divider>
+                  </v-card>
+                </a>
+              </v-col>
+            </v-row>
+          </template>
 
-    </div>
+          <template v-slot:footer>
+            <v-row
+              class="mt-2"
+              align="center"
+              justify="center"
+            >
+              <span class="grey--text">Items per page</span>
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    dark
+                    text
+                    color="primary"
+                    class="ml-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    {{ itemsPerPage }}
+                    <v-icon>mdi-chevron-down</v-icon>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item
+                    v-for="(number, index) in itemsPerPageArray"
+                    :key="index"
+                    @click="updateItemsPerPage(number)"
+                  >
+                    <v-list-item-title>{{ number }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+
+              <v-spacer></v-spacer>
+
+              <span
+                class="mr-4
+                grey--text"
+              >
+                Page {{ page }} of {{ numberOfPages }}
+              </span>
+              <v-btn
+                fab
+                dark
+                color="#018e98"
+                class="mr-1"
+                @click="formerPage"
+              >
+              <v-icon>mdi-chevron-left</v-icon>
+              </v-btn>
+                <v-btn
+                  fab
+                  dark
+                  color="#018e98"
+                  class="ml-1"
+                  @click="nextPage"
+                >
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-row>
+          </template>
+        </v-data-iterator>
+      </v-container>
     </div>
 
   </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage',
+  export default {
+    name: 'IndexPage',
 
-      async asyncData({$axios}) {
-      const res = await $axios.$get('api/teams/')
-      const komandy = res.teams;
-      return{komandy}
+    data: () => ({
+      itemsPerPageArray: [9, 19, 29, 39, 49],
+        search: '',
+        sortDesc: false,
+        page: 5,
+        itemsPerPage: 10,
+        sortBy: 'name',
+        keys: [
+        ],
+        items: [
+          {
+          },
+          ]
+    }),
+
+    async fetch({store}) {
+      if(store.getters['komandy/komandy'].length === 0) {
+        await store.dispatch('komandy/fetch')
+      }
     },
 
-
-  data() {
-    return {
-      selectedImg: "",
-      komandy: [],
-    }
-  },
-
-
-  computed: {
-    ImageSSS () {
-      if (!this.selectedImg) {
-        return
-      }
-      const fileName = this.selectedImg.toLowerCase();
-      return require(`komandy.crestUrl${fileName}.jpg`);
-    }
-  },
-
-  methods: {
-    openKomanda(komanda) {
-    this.$router.push('/komandy/' + komanda.id)
+    computed: {
+      komandy() {
+        return this.$store.getters['komandy/komandy']
+      },
+      numberOfPages () {
+        return Math.ceil(this.items.length / this.itemsPerPage)
+      },
+      filteredKeys () {
+        return this.keys.filter(key => key !== 'Name')
+      },
+    },
+  
+    methods: {
+      openKomandy(komanda) {
+        this.$router.push('/komandy/' + komanda.id)
+      },
+      nextPage () {
+        if (this.page + 1 <= this.numberOfPages) this.page += 1
+      },
+      formerPage () {
+        if (this.page - 1 >= 1) this.page -= 1
+      },
+      updateItemsPerPage (number) {
+        this.itemsPerPage = number
+      },
     }
   }
-}
 </script>
 
 <style lang="scss">
-/* Поиск */
-.search-form {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 50%;
-  height: 40px;
-  left: calc(50% - 50%/2);
-  top: 20%;
-
-  background: #FFFFFF;
-  border: 0px solid #000000;
-}
-
-.search-form input {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 85%;
-  height: 40px;
-  left: 0px;
-  top: 0px;
-
-  background: #FFFFFF;
-  border: 2px solid #000000;
-}
-
-.search-form button {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 15%;
-  height: 40px;
-  left: calc(85%);
-  top: 0px;
-
-  background: #ffffff;
-  border: 2px solid #000000;
-}
-
-.search-form button:hover {
-  border: 2px solid #7CBEC1;
-  color: #536591;
-}
-
-.search-form input:hover {
-  border: 2px solid #7CBEC1;
-}
-/* Конец - поиск */
-
-/* Карточки */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
-  padding: 300px;
-}
-
-.grid-element {
-  height: 200px;
-  padding: 20px;
-  border: solid 2px #000000;
-  text-align: center;
-
-  background: #FFFFFF;
-}
-
-.grid-element:hover {
-  border: 2px solid #7CBEC1;
-  color: #536591;
-}
-/* Конец - карточки */
-
 //logo
 .imgClass {
   position: absolute;
   width: 5%;
   height: 10%;
   left: calc(50% - 5%/2);
-  top: 9%;
+  top: 12%;
 }
 
+.na_glavnyy {
+  position: absolute;
+  width: 80px;
+  left: calc(50% - 80px/2);
+  top: 23%;
+
+  text-decoration: none;
+  color: #000000;
+}
+.na_glavnyy:hover {
+    color: #018e98;
+}
+
+/* Карточки */
+.matchKartochki {
+  position: absolute;
+  width: 70%;
+  left: calc(50% - 70%/2);
+  top: 30%;
+}
+/* Конец - карточки */
 </style>

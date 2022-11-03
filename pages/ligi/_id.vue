@@ -2,10 +2,11 @@
   <div>
 
     <div class="breadcrumb">
-      <v-breadcrumbs
-      :items="items"
-      divider=">"
-      ></v-breadcrumbs>
+    <nuxt-link id="cvet" to="/" class="kroshki">Главная</nuxt-link>
+    <nuxt-link to="" class="kroshki">></nuxt-link>
+    <nuxt-link id="cvet" to="/ligi" class="kroshki">Лиги</nuxt-link>
+    <nuxt-link to="" class="kroshki">></nuxt-link>
+    <nuxt-link to="" class="kroshki">{{competition.name}}</nuxt-link>
     </div>
 
     <h1>{{competition.name}}</h1>
@@ -41,24 +42,6 @@
     data: () => ({
       matches: [],
       competition: [],
-
-      items: [
-        {
-          text: 'Главная',
-          disabled: false,
-          href: '/',
-        },
-        {
-          text: 'Лиги',
-          disabled: false,
-          href: '/ligi/',
-        },
-        {
-          text: 'Лига',
-          disabled: true,
-          href: '/ligi/_id',
-        },
-      ],
 
       headers: [
         {
@@ -99,17 +82,22 @@ h1 {
 
 /* Хлебные крошки*/
 .breadcrumb {
-    position: absolute;
-    left: calc(50% - 100%/2 + 14%);
-    top: 10%;
-    color: #oooooo;
-    //почему не меняется цвет на черный?
+  position: absolute;
+  left: calc(50% - 100%/2 + 14%);
+  top: 10%;
+}
+
+.kroshki {
+  font-size: 14px;
+  text-decoration: none;
+  color: #000000;
 }
 
 /* Добавить цвет на наведении курсора мыши */
-.breadcrumb a:hover {
-    color: #018e98;
+#cvet:hover {
+  color: #018e98;
 }
+
 /* Конец - Хлебные крошки*/
 
 /*таблица*/
