@@ -2,7 +2,7 @@
   <div>
   
     <a href="/">
-      <img src="@/assets/majch.png" alt="" class="imgClass">
+      <img src="@/assets/majch.png" alt="" class="logo2">
     </a>
     <a class="na_glavnyy" to="/">На главную</a>
 
@@ -16,6 +16,9 @@
           :sort-desc="sortDesc"
           hide-default-footer
         >
+          <template #[`item.crestUrl`]="{item}">
+            <img :src="item.crestUrl" :height="30" >  
+          </template>
           <template v-slot:header>
             <v-toolbar
               dark
@@ -46,10 +49,13 @@
               >
                 <a  @click.prevent="openKomandy(item)">
                   <v-card>
-              
                     <v-card-title class="subheading font-weight-bold">
                       {{ item.name }}
                     </v-card-title>
+        
+                    <v-card>
+                      {{ item.crestUrl }}
+                    </v-card> 
 
                     <v-divider></v-divider>
                   </v-card>
@@ -122,6 +128,7 @@
       </v-container>
     </div>
 
+
   </div>
 </template>
 
@@ -132,16 +139,16 @@
     data: () => ({
       itemsPerPageArray: [9, 19, 29, 39, 49],
         search: '',
-        sortDesc: false,
-        page: 5,
+        sortDesc: true,
+        page: 5, 
         itemsPerPage: 10,
-        sortBy: 'name',
         keys: [
         ],
         items: [
           {
           },
-          ]
+          ],
+
     }),
 
     async fetch({store}) {
@@ -181,7 +188,7 @@
 
 <style lang="scss">
 //logo
-.imgClass {
+.logo2 {
   position: absolute;
   width: 5%;
   height: 10%;

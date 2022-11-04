@@ -1,12 +1,12 @@
 <template>
    <div>
         <div class="pole">
-           <v-toolbar class="h_header" dense color="#018e98">
+           <div class="h_header" dense>
                 <div class="menu_pole">
                     <nuxt-link id="menu_ligi" class="menu" to="/ligi">Все лиги</nuxt-link>
                     <nuxt-link id="menu_komandy" class="menu" to="/komandy">Команды</nuxt-link>
                 </div>
-            </v-toolbar>
+            </div>
             <nuxt />
         </div>
     </div>
@@ -32,10 +32,9 @@
     position: absolute;
     width: 100%;
     height: 60px;
-    left: 0px;
     top: 0px;
 
-    //background: #018e98;
+    background: #018e98;
 }
 
 //меню

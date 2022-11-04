@@ -11,13 +11,31 @@
 
     <h1>{{nameKomandy.name}}</h1>
 
+    
     <div class="tableKomanda">
-      <v-data-table
-      :headers="headers"
-      :items="matchesKomandy"
-      :items-per-page="7"
-      class="elevation-1"
-      ></v-data-table>
+      <v-card>
+        <v-card-title>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Введите запрос"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+        <v-data-table
+          :headers="headers"
+          :items="matchesKomandy"
+          :items-per-page="7"
+          :search="search"
+          class="elevation-1">
+
+          <template #[`item.area.flag`]="{ item }">
+            <img :src="item.area.flag" :height="30">
+          </template>
+
+        </v-data-table>
+      </v-card>
     </div>
 
   </div>
@@ -42,22 +60,24 @@
       matchesKomandy: [],
       nameKomandy: [],
 
+      search: '',
       headers: [
         {
-          text: 'Дата и время проведения',
+          text: 'Дата проведения',
           align: 'start',
-          sortable: true,
+          sortable: false,
           value: 'utcDate',
         },
-        { text: 'Статус матча', value: 'status' },
+        { text: 'Статус', value: 'status'},
         { text: 'Команда А', value: 'homeTeam.name' },
         { text: 'Счет', value: 'score.fullTime.home' },
         { text: 'halfTime', value: 'score.halfTime.home' },
         { text: 'Команда Б', value: 'awayTeam.name' },
         { text: 'Счет', value: 'score.fullTime.away' },
         { text: 'halfTime', value: 'score.halfTime.away' },
+        { text: 'Флаг', value: 'area.flag' },
       ],
-    })
+    }), 
   }
 </script>
 
@@ -67,7 +87,7 @@ h1 {
     position: absolute;
     width: 500px;
     left: calc(50% - 500px/2);
-    top: 15%;
+    top: 20%;
 
     color: #000000;
 
@@ -82,8 +102,8 @@ h1 {
 /* Хлебные крошки*/
 .breadcrumb {
   position: absolute;
-  left: calc(50% - 100%/2 + 14%);
-  top: 10%;
+  left: calc(50% - 100%/2 + 15%);
+  top: 15%;
 }
 
 .kroshki {
@@ -103,8 +123,8 @@ h1 {
 .tableKomanda {
   position: absolute;
   width: 70%;
-  left: calc(50% - 100%/2 + 14%);
-  top: 35%;
+  left: calc(50% - 70%/2);
+  top: 30%;
   text-align: center;
 }
 /*конец таблица*/

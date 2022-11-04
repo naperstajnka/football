@@ -2,7 +2,7 @@
   <div>
 
     <a href="/">
-      <img src="@/assets/majch.png" alt="" class="imgClass">
+      <img src="@/assets/majch.png" alt="" class="logo2">
     </a>
     <a class="na_glavnyy" to="/">На главную</a>
 
@@ -50,7 +50,7 @@
                       {{ item.name }}
                     </v-card-title>
                     <v-card>
-                      {{ item.area.name }}
+                      {{ item.area.name}}
                     </v-card>
 
                     <v-divider></v-divider>
@@ -135,10 +135,9 @@
     data: () => ({
       itemsPerPageArray: [5, 9, 0],
       search: '',
-      sortDesc: false,
+      sortDesc: true,
       page: 2,
       itemsPerPage: 6,
-      sortBy: 'name',
       keys: [
       ],
       items: [
@@ -184,7 +183,7 @@
 
 <style lang="scss">
 //logo
-.imgClass {
+.logo2 {
   position: absolute;
   width: 5%;
   height: 10%;

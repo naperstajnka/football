@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/assets/majch.png" alt="" class="imgGl">
+    <img src="@/assets/9ZTa.gif" alt="" class="fon">
   </div>
 </template>
 
@@ -11,12 +11,11 @@
 </script>
 
 <style lang="scss">
-.imgGl {
+.fon {
   position: absolute;
-  width: 20%;
-  height: 40%;
-  left: calc(50% - 20%/2);
+  max-width: 100%;
+  height: auto;
+  left: calc(50% - 50%/2);
   top: 25%;
 }
-
 </style>
