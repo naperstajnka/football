@@ -50,11 +50,7 @@
                     </v-card-title>
         
                     <v-card>
-                      {{"Место встречи:"}}
-                    </v-card> 
-
-                    <v-card>
-                      {{ item.venue }}
+                      {{"Место встречи: "}} {{ item.venue }}
                     </v-card> 
 
                     <v-divider></v-divider>

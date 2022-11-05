@@ -50,12 +50,8 @@
                     </v-card-title>
     
                     <v-card>
-                      {{"Cтрана:"}}
+                      {{"Cтрана: "}} {{ item.area.name }}
                     </v-card> 
-
-                    <v-card>
-                      {{ item.area.name }}
-                    </v-card>
 
                     <v-divider></v-divider>
                   </v-card>
