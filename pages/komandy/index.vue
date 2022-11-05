@@ -13,12 +13,8 @@
           :items-per-page.sync="itemsPerPage"
           :page.sync="page"
           :search="search"
-          :sort-desc="sortDesc"
           hide-default-footer
         >
-          <template #[`item.crestUrl`]="{item}">
-            <img :src="item.crestUrl" :height="30" >  
-          </template>
           <template v-slot:header>
             <v-toolbar
               dark
@@ -54,7 +50,11 @@
                     </v-card-title>
         
                     <v-card>
-                      {{ item.crestUrl }}
+                      {{"Место встречи:"}}
+                    </v-card> 
+
+                    <v-card>
+                      {{ item.venue }}
                     </v-card> 
 
                     <v-divider></v-divider>
@@ -139,7 +139,6 @@
     data: () => ({
       itemsPerPageArray: [9, 19, 29, 39, 49],
         search: '',
-        sortDesc: true,
         page: 5, 
         itemsPerPage: 10,
         keys: [

@@ -65,7 +65,7 @@
         {
           text: 'Дата проведения',
           align: 'start',
-          sortable: false,
+          sortable: true,
           value: 'utcDate',
         },
         { text: 'Статус', value: 'status'},

@@ -13,15 +13,14 @@
           :items-per-page.sync="itemsPerPage"
           :page.sync="page"
           :search="search"
-          :sort-desc="sortDesc"
-          hide-default-footer
-        >
+          hide-default-footer>
+
           <template v-slot:header>
             <v-toolbar
               dark
               color="#018e98"
               class="mb-1"
-            >
+              >
               <v-text-field
                 v-model="search"
                 clearable
@@ -29,8 +28,8 @@
                 solo-inverted
                 hide-details
                 prepend-inner-icon="mdi-magnify"
-                label="Search"
-              ></v-text-field>
+                label="Search">
+              </v-text-field>
             </v-toolbar>
           </template>
 
@@ -43,14 +42,19 @@
                 sm="6"
                 md="4"
                 lg="3"
-              >
+                >
                 <a  @click.prevent="openLigi(item)">
                   <v-card>
                     <v-card-title class="subheading font-weight-bold">
                       {{ item.name }}
                     </v-card-title>
+    
                     <v-card>
-                      {{ item.area.name}}
+                      {{"Cтрана:"}}
+                    </v-card> 
+
+                    <v-card>
+                      {{ item.area.name }}
                     </v-card>
 
                     <v-divider></v-divider>
@@ -133,9 +137,8 @@
     name: 'IndexPage',
 
     data: () => ({
-      itemsPerPageArray: [5, 9, 0],
+      itemsPerPageArray: [5, 9],
       search: '',
-      sortDesc: true,
       page: 2,
       itemsPerPage: 6,
       keys: [
@@ -143,7 +146,7 @@
       items: [
         {
         },
-      ]
+      ],
     }),
 
     async fetch({store}) {

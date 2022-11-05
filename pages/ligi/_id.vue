@@ -25,14 +25,13 @@
         <v-data-table
           :headers="headers"
           :items="matches"
-          :items-per-page="7"
           :search="search"
+          :items-per-page="7"
           class="elevation-1">
 
           <template #[`item.area.flag`]="{ item }">
             <img :src="item.area.flag" :height="30">
           </template>
-
         </v-data-table>
       </v-card>
     </div>
@@ -53,19 +52,18 @@
       const res = await $axios.$get('api/competitions/' + params.id + '/matches/')
       const matches = res.matches;
       const competition = res.competition;
-      return{matches, competition}
+      return{ matches, competition}
     },
 
     data: () => ({
       matches: [],
       competition: [],
-
       search: '',
       headers: [
         {
           text: 'Дата и время проведения',
           align: 'start',
-          sortable: false,
+          sortable: true,
           value: 'utcDate',
         },
         { text: 'Статус матча', value: 'status' },
@@ -77,7 +75,7 @@
         { text: 'halfTime', value: 'score.halfTime.away' },
         { text: 'Флаг', value: 'area.flag' },
       ],
-    })
+    }),  
   }
 </script>
 
@@ -116,7 +114,6 @@ h1 {
 #cvet:hover {
   color: #018e98;
 }
-
 /* Конец - Хлебные крошки*/
 
 /*таблица*/
