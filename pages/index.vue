@@ -23,8 +23,8 @@
 }
 .sss {
   position: absolute;
-  width: 70%;
-  left: calc(60% - 70%/2);
+  width: 50%;
+  left: calc(50% - 50%/2);
   top: 20%;
 }
 </style>
