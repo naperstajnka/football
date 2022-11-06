@@ -1,6 +1,9 @@
 <template>
+<div>
   <div>
     <img src="@/assets/9ZTa.gif" alt="" class="fon">
+  </div>
+  <h1 class="sss"><b>Здесь потрясающая по дизайну Главная Страница приложения</b></h1>
   </div>
 </template>
 
@@ -17,5 +20,11 @@
   height: auto;
   left: calc(50% - 50%/2);
   top: 25%;
+}
+.sss {
+  position: absolute;
+  width: 70%;
+  left: calc(60% - 70%/2);
+  top: 20%;
 }
 </style>
