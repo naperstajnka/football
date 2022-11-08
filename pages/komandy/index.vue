@@ -50,7 +50,11 @@
                     </v-card-title>
         
                     <v-card>
-                      {{"Место встречи: "}} {{ item.venue }}
+                      <template>
+                        <slot name="komandyEmbltm"><img :src="item.crest" :height="30"></slot>
+                      </template>
+
+                      {{"  "}} {{ item.venue }}
                     </v-card> 
 
                     <v-divider></v-divider>

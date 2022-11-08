@@ -47,10 +47,14 @@
                   <v-card>
                     <v-card-title class="subheading font-weight-bold">
                       {{ item.name }}
-                    </v-card-title>
-    
+                    </v-card-title>  
+
                     <v-card>
-                      {{"Cтрана: "}} {{ item.area.name }}
+                      <template>
+                        <slot name="ligiFlag"><img :src="item.area.flag" :height="30"></slot>
+                      </template>
+                    
+                      {{"   "}} {{ item.area.name }}
                     </v-card> 
 
                     <v-divider></v-divider>
