@@ -44,6 +44,7 @@
                 lg="3"
                 >
                 <a  @click.prevent="openLigi(item)">
+                <br/>
                   <v-card>
                     <v-card-title class="subheading font-weight-bold">
                       {{ item.name }}
